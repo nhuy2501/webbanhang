@@ -85,7 +85,7 @@ require('class/myclass.php');
  	$sanpham['hinhanh']=$_FILES['hinhanh']['name'];
  	$sanpham['tmp']=$_FILES['hinhanh']['tmp_name'];
  	$sanpham['type']=$_FILES['hinhanh']['type'];
- 	if ($p->insert($id, $sanpham)==1){
+ 	if ($p->insert($sanpham)==1){
  		echo'<script>
 			alert("Insert thành công.");
 			window.location="danhsachsua.php";

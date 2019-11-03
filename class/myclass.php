@@ -28,7 +28,7 @@ class xuli
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['dongia'].' VNĐ</a></td>
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['thanhphandinhduong'].' </a></td>
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['loiich'].' </a></td>
-					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['hinhanh'].' </a></td>
+					<td><img src="file/'.$row['hinhanh'].'" width="100"></td>
 				</tr>';
 		}
 		
@@ -81,15 +81,15 @@ class xuli
 	}
 
 	function upload ($name, $tmp, $type){
-		if($type=='text/plain'){
-			move_uploaded_file($tmp_name,'file/'.$name);
+//		if($type!=='text/plain'){
+			move_uploaded_file($tmp,'file/'.$name);
 
-		}else{
-			echo" Không đúng định dạng file.";
-		}
+//		}else{
+//			echo" Không đúng định dạng file.";
+//		}
 	}
 
-	function insert($id, $sanpham){
+	function insert($sanpham){
 		$db=$this->connect();
 		$tensua=$sanpham['tensua'];
 		$hangsua=$sanpham['hangsua'];
@@ -99,10 +99,13 @@ class xuli
 		$thanhphandinhduong=$sanpham['thanhphandinhduong'];
 		$loiich=$sanpham['loiich'];
 		$hinhanh=$sanpham['hinhanh'];
+		$type = $sanpham['type'];
+		$tmp = $sanpham['tmp'];
 		$query = "INSERT INTO thongtinsua (tensua, hangsua, loaisua, trongluong, dongia, thanhphandinhduong, loiich, hinhanh)
 		          VALUES ('$tensua', '$hangsua', '$loaisua', '$trongluong', '$dongia', '$thanhphandinhduong', '$loiich', '$hinhanh')";
 
 		if(mysqli_query($db, $query)){
+		    $this->upload($hinhanh, $tmp, $type);
 			return 1;
 		}
 		return 0;
