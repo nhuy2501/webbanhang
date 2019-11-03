@@ -83,8 +83,8 @@ require('class/myclass.php');
  	$sanpham['thanhphandinhduong']=$_REQUEST['thanhphandinhduong'];
  	$sanpham['loiich']=$_REQUEST['loiich'];
  	$sanpham['hinhanh']=$_FILES['hinhanh']['name'];
- 	$sanpham['tmp']=$_FILES['file']['tmp_name'];
- 	$sanpham['type']=
+ 	$sanpham['tmp']=$_FILES['hinhanh']['tmp_name'];
+ 	$sanpham['type']=$_FILES['hinhanh']['type'];
  	if ($p->insert($id, $sanpham)==1){
  		echo'<script>
 			alert("Insert thành công.");
