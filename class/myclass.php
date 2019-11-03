@@ -85,10 +85,10 @@ class xuli
 			move_uploaded_file($tmp_name,'file/'.$name);
 
 		}else{
-			echo" Không đúng định dạng file. ";
+			echo" Không đúng định dạng file.";
 		}
 	}
-	
+
 	function insert($id, $sanpham){
 		$db=$this->connect();
 		$tensua=$sanpham['tensua'];

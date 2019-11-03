@@ -12,7 +12,7 @@ class connect {
 	 * @var [type]
 	 */
 	public $host;
-
+d
 	/**
 	 * [$username description]
 	 * @var [type]
