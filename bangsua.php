@@ -15,6 +15,9 @@
 <title>Untitled Document</title>
 
 </head>
+<div>
+    <a href="danhsachsua.php">Danh sách</a>
+</div>
 <body>
 	
 	<form  method="post" name="form1" enctype="multipart/form-data" >
@@ -58,6 +61,24 @@
 					
 					<input type="text" name="dongia" value="<?= $sp['dongia'] ?>" id="donggia"></td>
 			</tr>
+            <tr>
+                <td><label for="thanhphandinhduong">Thành phần dinh dưỡng</label></td>
+                <td>
+
+                    <textarea name="thanhphandinhduong" id="thanhphandinhduong" cols="30" rows="5"><?= $sp['thanhphandinhduong'] ?></textarea>
+            </tr>
+            <tr>
+                <td><label for="loiich">Đơn giá</label></td>
+                <td>
+
+                    <textarea name="loiich" id="loiich" cols="30" rows="5"><?= $sp['loiich'] ?></textarea>
+            </tr>
+            <tr>
+                <td><label for="hinhanh">Hình ảnh</label></td>
+                <td>
+                    <input type="file" name="hinhanh" id="hinhanh">
+                    <img src="file/<?= $sp['hinhanh'] ?>" width="100">
+            </tr>
 			<tr>
 				<td colspan="2" align="center">
 					<input type="submit" name="nut" value="Cập nhập">
@@ -74,10 +95,19 @@
  	$sanpham['loaisua']=$_REQUEST['loaisua'];
  	$sanpham['trongluong']=$_REQUEST['trongluong'];
  	$sanpham['dongia']=$_REQUEST['dongia'];
- 	if ($p->update($id, $sanpham)==1){
+ 	$sanpham['thanhphandinhduong'] = $_REQUEST['thanhphandinhduong'];
+ 	$sanpham['loiich'] = $_REQUEST['loiich'];
+ 	if(empty($_FILES['hinhanh']['name'])) {
+ 	    $hinhanh='';
+    } else {
+        $hinhanh['hinhanh'] = $_FILES['hinhanh']['name'];
+        $hinhanh['type'] = $_FILES['hinhanh']['type'];
+        $hinhanh['tmp'] = $_FILES['hinhanh']['tmp_name'];
+    }
+ 	if ($p->update($id, $sanpham, $hinhanh)==1){
  		echo'<script>
 			alert("Update thành công.");
-			window.location="bangsua.php?id='.$id.'";
+			window.location = "bangsua.php?id='.$id.'";
 		</script>';
  	}else
  	echo'Update không thành công.';

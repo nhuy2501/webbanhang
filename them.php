@@ -8,6 +8,9 @@ require('class/myclass.php');
 	<meta charset="UTF-8">
 	<title>Document</title>
 </head>
+<div>
+    <a href="danhsachsua.php">Danh sách</a>
+</div>
 <body>
 	<form  method="post" name="form1" enctype="multipart/form-data" >
 		<table width="400" border="1" align="center">

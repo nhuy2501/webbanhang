@@ -18,8 +18,10 @@ class xuli
 		$db = $this->connect();
 		$query = "SELECT * FROM thongtinsua";
 		$result = mysqli_query($db, $query);
-		while($row = mysqli_fetch_array($result)) {
-			echo '<tr>
+		$num = mysqli_num_rows($result);
+		if($num!=0) {
+            while($row = mysqli_fetch_array($result)) {
+                echo '<tr>
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['id'].'</a></td>
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['tensua'].'</a></td>
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['hangsua'].'</a></td>
@@ -28,11 +30,17 @@ class xuli
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['dongia'].' VNĐ</a></td>
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['thanhphandinhduong'].' </a></td>
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['loiich'].' </a></td>
-					<td><img src="file/'.$row['hinhanh'].'" width="100"></td>
+					
+					<td><img src="file/'.$row['hinhanh'].'" width="100" ></td>
+					<td><form action="xoa.php?id='.$row['id'].'" method="post">
+					    <input type="submit" name="xoa" value="Xóa">
+                    </form></td>
 				</tr>';
-		}
-		
+            }
+        }
+
 	}
+
 
 	/**
 	 * 
@@ -54,25 +62,49 @@ class xuli
 			$sp['trongluong']=$row['trongluong'];
 
 			$sp['dongia']=$row['dongia'];
+			$sp['thanhphandinhduong'] = $row['thanhphandinhduong'];
+			$sp['loiich'] = $row['loiich'];
+			$sp['hinhanh'] = $row['hinhanh'];
 
 		}
 		return $sp;
 	}
 
-	function update($id, $sanpham){
+	function update($id, $sanpham, $hinhanh){
 		$db=$this->connect();
 		$tensua=$sanpham['tensua'];
 		$hangsua=$sanpham['hangsua'];
 		$loaisua=$sanpham['loaisua'];
 		$trongluong=$sanpham['trongluong'];
 		$dongia=$sanpham['dongia'];
-		$query = "UPDATE thongtinsua 
+		$thanhphandinhduong = $_REQUEST['thanhphandinhduong'];
+		$loiich = $_REQUEST['loiich'];
+		if($hinhanh=='') {
+            $query = "UPDATE thongtinsua 
 		          SET tensua='$tensua', 
 		              hangsua='$hangsua', 
 		              loaisua='$loaisua',
 		              trongluong='$trongluong',
-		              dongia='$dongia'
+		              dongia='$dongia',
+		              thanhphandinhduong = '$thanhphandinhduong',
+		              loiich = '$loiich'
 		          WHERE id='$id';";
+        } else {
+		    $tenhinh = $hinhanh['hinhanh'];
+		    $type = $hinhanh['type'];
+		    $tmp = $hinhanh['tmp'];
+            $query = "UPDATE thongtinsua 
+		          SET tensua='$tensua', 
+		              hangsua='$hangsua', 
+		              loaisua='$loaisua',
+		              trongluong='$trongluong',
+		              dongia='$dongia',
+		              thanhphandinhduong = '$thanhphandinhduong',
+		              loiich = '$loiich',
+		              hinhanh = '$tenhinh'
+		          WHERE id='$id';";
+            $this->upload($tenhinh, $tmp, $type);
+        }
 		if(mysqli_query($db, $query)){
 			return 1;
 		}
@@ -111,6 +143,7 @@ class xuli
 		return 0;
 
 	}
+
 
 
 }

@@ -10,6 +10,9 @@
 <title>Untitled Document</title>
 </head>
 <body>
+<div>
+    <a href="them.php">Thêm sữa</a>
+</div>
 	<h2 align="center">Thông Tin Sữa</h2>
 <table width="1000" border="1" align="center">
 <tr>
