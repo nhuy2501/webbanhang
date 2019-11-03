@@ -30,9 +30,9 @@ class xuli
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['dongia'].' VNĐ</a></td>
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['thanhphandinhduong'].' </a></td>
 					<td><a href="bangsua.php?id='.$row['id'].'">'.$row['loiich'].' </a></td>
-					
 					<td><img src="file/'.$row['hinhanh'].'" width="100" ></td>
-					<td><form action="xoa.php?id='.$row['id'].'" method="post">
+					<td><form  method="post" action="xoa.php">
+					    <input type="hidden" value="'.$row['id'].'" name="idsp">
 					    <input type="submit" name="xoa" value="Xóa">
                     </form></td>
 				</tr>';
@@ -143,6 +143,17 @@ class xuli
 		return 0;
 
 	}
+
+	function delete($id) {
+	    $db = $this->connect();
+	    $query = "DELETE FROM thongtinsua 
+                  WHERE id = '$id'";
+	    if(mysqli_query($db, $query)) {
+	        return 1;
+        }
+
+	    return 0;
+    }
 
 
 

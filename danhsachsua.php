@@ -29,6 +29,5 @@
 	 $p->getBangSua();
 
 ?>
-
 </body>
 </html>
