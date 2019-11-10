@@ -3,8 +3,11 @@
 	$p = new xuli();
 	if(isset($_GET['id'])){
 		$id=$_GET['id'];
-
-	}
+	} else {
+        echo '<script>
+                window.location = "danhsachsua.php";
+        </script>';
+    }
 	$sp = $p->getChitietbangsua($id);
 ?>
 

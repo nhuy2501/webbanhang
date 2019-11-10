@@ -50,24 +50,29 @@ class xuli
 		$db = $this->connect();
 		$query = "SELECT * FROM thongtinsua WHERE id='$id' ";
 		$result = mysqli_query($db, $query);
-		while ($row = mysqli_fetch_array($result)) {
-			$sp['masua']=$row['id'];
+		$num = mysqli_num_rows($result);
+		if($num!=0) {
+            while ($row = mysqli_fetch_array($result)) {
+                $sp['masua']=$row['id'];
 
-			$sp['tensua']=$row['tensua'];
+                $sp['tensua']=$row['tensua'];
 
-			$sp['hangsua']=$row['hangsua'];
+                $sp['hangsua']=$row['hangsua'];
 
-			$sp['loaisua']=$row['loaisua'];
-	
-			$sp['trongluong']=$row['trongluong'];
+                $sp['loaisua']=$row['loaisua'];
 
-			$sp['dongia']=$row['dongia'];
-			$sp['thanhphandinhduong'] = $row['thanhphandinhduong'];
-			$sp['loiich'] = $row['loiich'];
-			$sp['hinhanh'] = $row['hinhanh'];
+                $sp['trongluong']=$row['trongluong'];
 
-		}
-		return $sp;
+                $sp['dongia']=$row['dongia'];
+                $sp['thanhphandinhduong'] = $row['thanhphandinhduong'];
+                $sp['loiich'] = $row['loiich'];
+                $sp['hinhanh'] = $row['hinhanh'];
+
+            }
+            return $sp;
+        }
+		return $sp='';
+
 	}
 
 	function update($id, $sanpham, $hinhanh){
